@@ -9,7 +9,8 @@ public class UserEntityConfiguration : IMongoDbEntityConfiguration
     public async Task ConfigureAsync(IMongoDatabase database)
     {
         var indexModel = new CreateIndexModel<User>(
-            Builders<User>.IndexKeys.Text(i=>i.PhoneNumber));
+            Builders<User>.IndexKeys.Text(i=>i.PhoneNumber)
+            ,new CreateIndexOptions{Unique = true});
         
         var collection = database.GetCollection<User>(User.CollectionName);
         await collection.Indexes.CreateOneAsync(indexModel);

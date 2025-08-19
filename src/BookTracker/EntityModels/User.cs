@@ -7,12 +7,24 @@ namespace BookTracker.EntityModels;
 public class User
 {
     [NotMapped][BsonIgnore] public const string CollectionName = "Users";
-    
-    public ObjectId Id { get; set; }
-    public string PhoneNumber { get; set; }
-    public string Password { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdateAt { get; set; }
 
-    public List<Book> Books { get; set; }
+    private readonly List<Book> _books = [];
+    
+    public ObjectId Id { get; private init; }
+    public string PhoneNumber { get; private set; }
+    public string Password { get; private set; }
+    public DateTime CreatedAt { get; private set; }
+    public DateTime UpdateAt { get; private set; }
+
+    public IReadOnlyList<Book> Books => _books.AsReadOnly();
+
+    public static User Create(string phoneNumber, string password)
+        => new()
+        {
+            Id = ObjectId.GenerateNewId(),
+            PhoneNumber = phoneNumber,
+            Password = password,
+            CreatedAt = DateTime.Now,
+            UpdateAt = DateTime.Now
+        };
 }

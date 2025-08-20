@@ -2,6 +2,7 @@
 using BookTracker.EntityModels;
 using Carter;
 using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -16,7 +17,7 @@ public class UpdateBookEndpoint : ICarterModule
             UpdateBookRequest request,
             IMongoDatabase db,
             HttpContext context,
-            IValidator<UpdateBookRequest> validator) =>
+            [FromServices]IValidator<UpdateBookRequest> validator) =>
         {
             var validationResult = await validator.ValidateAsync(request);
             if (!validationResult.IsValid)

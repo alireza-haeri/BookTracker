@@ -2,6 +2,7 @@
 using FluentValidation;
 using MongoDB.Driver;
 using BookTracker.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookTracker.Endpoints.User;
 
@@ -9,7 +10,7 @@ public class LoginUserEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/user/login", async (LoginUserRequest request, IValidator<LoginUserRequest> validator, IMongoDatabase db,JwtTokenService jwtTokenService) =>
+        app.MapPost("/user/login", async (LoginUserRequest request, [FromServices]IValidator<LoginUserRequest> validator, IMongoDatabase db,JwtTokenService jwtTokenService) =>
         {
             var validationResult = await validator.ValidateAsync(request);
             if (!validationResult.IsValid)

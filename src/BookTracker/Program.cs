@@ -17,10 +17,6 @@ builder
     .ConfigureMongoDb(options)
     .ConfigureMongoDbEntities();
 
-builder.Services.AddSingleton<JwtTokenService>();
-
-builder.Services.AddCarter();
-
 builder.Services.AddAuthentication(authenticationOptions =>
 {
     authenticationOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -43,7 +39,10 @@ builder.Services.AddAuthentication(authenticationOptions =>
     };
 });
 
+builder.Services.AddSingleton<JwtTokenService>();
 builder.Services.AddAuthorization();
+builder.Services.AddOpenApi();
+builder.Services.AddCarter();
 
 var app = builder.Build();
 

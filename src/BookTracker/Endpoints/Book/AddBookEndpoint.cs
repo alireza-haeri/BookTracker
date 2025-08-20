@@ -1,7 +1,9 @@
 ﻿using BookTracker.Common;
+using BookTracker.Endpoints.User;
 using BookTracker.EntityModels;
 using Carter;
 using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -11,8 +13,12 @@ public class AddBookEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/book", async (AddBookRequest request, IMongoDatabase db,HttpContext context) =>
+        app.MapPost("/book", async (AddBookRequest request, IMongoDatabase db,HttpContext context,[FromServices] IValidator<AddBookRequest> validator) =>
         {
+            var validationResult = await validator.ValidateAsync(request);
+            if (!validationResult.IsValid)
+                return Results.ValidationProblem(validationResult.ToDictionary());
+            
             var userIdClaim = context.User.Claims.FirstOrDefault(c=>c.Type == JwtClaimTypes.UserId)?.Value;
             if (userIdClaim is null)
                 return Results.BadRequest("UserId not found");

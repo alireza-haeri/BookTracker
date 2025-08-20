@@ -1,8 +1,11 @@
 # 📚 BookTracker API
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/9154de2d-1b45-4f24-86f3-8624ff1d14aa" alt="BookTracker API Showcase">
+</p>
+
 BookTracker is a **practical backend project** built with **ASP.NET Core Minimal API**, **MongoDB**, and **JWT authentication**.  
 It was designed both as a **portfolio project** and as a way to gain **hands-on experience** with MongoDB, authentication, and modern .NET practices.  
-
 
 ## 🚀 Features
 - 🔐 **User Authentication** with JWT  

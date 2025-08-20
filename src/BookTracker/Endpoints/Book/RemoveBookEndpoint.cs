@@ -31,6 +31,7 @@ public class RemoveBookEndpoint : ICarterModule
                 return Results.NotFound($"No book found with ID {id} for the current user.");
 
             return Results.Ok($"Book with ID {id} has been successfully removed.");
-        });
+        }).RequireAuthorization()
+        .WithTags("Book");
     }
 }

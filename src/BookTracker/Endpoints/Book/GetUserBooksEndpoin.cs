@@ -37,7 +37,8 @@ public class GetUserBooksEndpoint : ICarterModule
                 b.CreatedAt
             )));
         })
-        .RequireAuthorization();
+        .RequireAuthorization()
+        .WithTags("Book");
     }
 
     public record BookResponse(

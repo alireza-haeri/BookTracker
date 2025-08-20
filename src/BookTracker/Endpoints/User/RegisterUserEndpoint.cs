@@ -29,7 +29,8 @@ public class RegisterUserEndpoint : ICarterModule
                 var token = jwtTokenService.GenerateToken(entity.Id.ToString(), entity.PhoneNumber);
                 
                 return Results.Ok(new RegisterUserResponse(token.Token, token.Expire));
-            });
+            })
+            .WithTags("User");
     }
 
     public record RegisterUserRequest(

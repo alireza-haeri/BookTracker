@@ -45,7 +45,8 @@ public class UpdateBookEndpoint : ICarterModule
                 return Results.NotFound($"No book found with ID {id} for the current user.");
 
             return Results.Ok($"Book with ID {id} has been successfully updated.");
-        });
+        }).RequireAuthorization()
+        .WithTags("Book");
     }
 
     public record UpdateBookRequest(

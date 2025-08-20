@@ -30,7 +30,8 @@ public class LoginUserEndpoint : ICarterModule
             var response = new LoginUserResponse(token.Token,token.Expire);
 
             return Results.Ok(response);
-        });
+        })
+        .WithTags("User");
     }
 
     public record LoginUserRequest(

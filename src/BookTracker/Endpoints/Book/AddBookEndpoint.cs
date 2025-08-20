@@ -32,7 +32,9 @@ public class AddBookEndpoint : ICarterModule
             await collection.InsertOneAsync(book);
 
             return Results.Created($"/book/{book.Id}", book);
-        });
+        })
+        .RequireAuthorization()
+        .WithTags("Book");
     }
 
     public record AddBookRequest(string Title, string Author, string Notes, BookStatus Status)

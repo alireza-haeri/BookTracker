@@ -1,8 +1,10 @@
+using System.Reflection;
 using System.Text;
 using BookTracker.Common;
 using BookTracker.MongoDb.Extensions;
 using BookTracker.Services;
 using Carter;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -40,6 +42,7 @@ builder.Services.AddAuthentication(authenticationOptions =>
 });
 
 builder.Services.AddSingleton<JwtTokenService>();
+builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 builder.Services.AddAuthorization();
 builder.Services.AddOpenApi();
 builder.Services.AddCarter();

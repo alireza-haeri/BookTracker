@@ -1,4 +1,5 @@
-﻿using Carter;
+﻿using BookTracker.Services;
+using Carter;
 using FluentValidation;
 using MongoDB.Driver;
 
@@ -9,7 +10,7 @@ public class RegisterUserEndpoint : ICarterModule
     public void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapPost("/user",
-            async (RegisterUserRequest request, IValidator<RegisterUserRequest> validator, IMongoDatabase db) =>
+            async (RegisterUserRequest request, IValidator<RegisterUserRequest> validator, IMongoDatabase db,JwtTokenService jwtTokenService) =>
             {
                 var validationResult = await validator.ValidateAsync(request);
                 if (!validationResult.IsValid)
@@ -24,8 +25,9 @@ public class RegisterUserEndpoint : ICarterModule
                 var entity = request.ToEntity();
                 await collection.InsertOneAsync(entity);
 
-                return Results.Created($"/user/{entity.Id}",
-                    new RegisterUserResponse(entity.Id.ToString(), entity.PhoneNumber, entity.CreatedAt));
+                var token = jwtTokenService.GenerateToken(entity.Id.ToString(), entity.PhoneNumber);
+                
+                return Results.Ok(new RegisterUserResponse(token.Token, token.Expire));
             });
     }
 
@@ -38,8 +40,10 @@ public class RegisterUserEndpoint : ICarterModule
             => EntityModels.User.Create(PhoneNumber, Password);
     };
 
-    public record RegisterUserResponse(string Id, string PhoneNumber, DateTime CreatedAt);
-
+    public record RegisterUserResponse(
+        string Token,
+        int ExpireMinute
+    );
     public class RegisterUserRequestValidator : AbstractValidator<RegisterUserRequest>
     {
         public RegisterUserRequestValidator()

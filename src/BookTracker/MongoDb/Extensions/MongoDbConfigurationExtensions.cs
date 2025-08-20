@@ -1,13 +1,14 @@
-﻿using BookTracker.MongoDb.Configuration;
+﻿using BookTracker.Common;
+using BookTracker.MongoDb.Configuration;
 using MongoDB.Driver;
 
 namespace BookTracker.MongoDb.Extensions;
 
 public static class MongoDbConfigurationExtensions
 {
-    public static WebApplicationBuilder ConfigureMongoDb(this WebApplicationBuilder builder)
+    public static WebApplicationBuilder ConfigureMongoDb(this WebApplicationBuilder builder,ApplicationSetting options)
     {
-        var mongoClient = new MongoClient(builder.Configuration.GetConnectionString("MongoDb"));
+        var mongoClient = new MongoClient(options.MongoDbConfiguration.ConnectionString);
 
         var mongoDatabase = mongoClient.GetDatabase("BookTracker");
 

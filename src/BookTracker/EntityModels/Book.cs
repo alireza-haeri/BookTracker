@@ -20,6 +20,18 @@ public class Book
 
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public BookStatus Status { get; set; }
+
+    public static Book Create(string title,string author,string notes,BookStatus status,ObjectId userId)
+        => new()
+        {
+            Title = title,
+            Author = author,
+            Notes = notes,
+            CreatedAt = DateTime.Now,
+            UpdateAt = DateTime.Now,
+            UserId = userId,
+            Status = status
+        };
 }
 
 public enum BookStatus

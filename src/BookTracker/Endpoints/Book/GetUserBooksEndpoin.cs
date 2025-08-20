@@ -1,10 +1,9 @@
-﻿using System.Security.Claims;
-using BookTracker.Common;
+﻿using BookTracker.Common;
 using Carter;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace BookTracker.Endpoints.User;
+namespace BookTracker.Endpoints.Book;
 
 public class GetUserBooksEndpoint : ICarterModule
 {

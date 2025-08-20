@@ -3,7 +3,6 @@
 BookTracker is a **practical backend project** built with **ASP.NET Core Minimal API**, **MongoDB**, and **JWT authentication**.  
 It was designed both as a **portfolio project** and as a way to gain **hands-on experience** with MongoDB, authentication, and modern .NET practices.  
 
----
 
 ## 🚀 Features
 - 🔐 **User Authentication** with JWT  
@@ -15,7 +14,6 @@ It was designed both as a **portfolio project** and as a way to gain **hands-on 
 - ✅ **Input Validation** using FluentValidation  
 - 📑 **API Documentation** powered by Scalar  
 
----
 
 ## 🛠️ Tech Stack
 - **ASP.NET Core Minimal API** (for lightweight endpoints)  
@@ -24,7 +22,6 @@ It was designed both as a **portfolio project** and as a way to gain **hands-on 
 - **FluentValidation** (clean validation layer)  
 - **Scalar** (modern API documentation)  
 
----
 
 ## 📌 Endpoints (v1)
 
@@ -39,14 +36,12 @@ It was designed both as a **portfolio project** and as a way to gain **hands-on 
 - `DELETE /book/{id}` → Delete book by ID  
 - `GET /user/books` → Get all books for current user  
 
----
 
 ## ⚙️ Notes
 - The focus of this project is **practical learning**, not applying a complex architecture.  
 - The code is kept **modular and clean**, making it easy to extend later.  
 - It demonstrates real-world usage of MongoDB, JWT authentication, and Minimal APIs.  
 
----
 
 ## ✨ Personal Takeaway
 Building **BookTracker** was a valuable experience that helped me:  
@@ -55,7 +50,6 @@ Building **BookTracker** was a valuable experience that helped me:
 - Explore the simplicity and flexibility of Minimal APIs  
 - Create a complete, working project that can be showcased in my portfolio  
 
----
 
 ## 📫 Let's Connect!
 

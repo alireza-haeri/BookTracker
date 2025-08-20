@@ -23,7 +23,7 @@ public class RemoveBookEndpoint : ICarterModule
             if (!ObjectId.TryParse(userIdClaim, out var userId))
                 return Results.BadRequest("UserId not valid");
             
-            var collection = db.GetCollection<EntityModels.Book>("Books");
+            var collection = db.GetCollection<EntityModels.Book>(EntityModels.Book.CollectionName);
 
             var result = await collection.DeleteOneAsync(x => x.Id == objectId && x.UserId == userId);
 

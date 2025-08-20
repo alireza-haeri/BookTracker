@@ -26,12 +26,12 @@ public class JwtTokenService(IOptions<ApplicationSetting> options)
             issuer: _jwtConfiguration.Issuer,
             audience: _jwtConfiguration.Audience,
             claims: claims,
-            expires: DateTime.Now.AddMinutes(_jwtConfiguration.ExpireMinute),
+            expires: DateTime.UtcNow.AddMinutes(_jwtConfiguration.ExpireMinute),
             signingCredentials: signingCredentials
         );
 
         var token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-        var expireTimestamp = (int)(jwtSecurityToken.ValidTo - DateTime.Now).TotalSeconds;
+        var expireTimestamp = (int)(jwtSecurityToken.ValidTo - DateTime.UtcNow).TotalMinutes;
 
         return new AccessTokenModel(token, expireTimestamp);
 

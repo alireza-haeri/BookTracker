@@ -30,7 +30,7 @@ public class UpdateBookEndpoint : ICarterModule
             if (userIdClaim is null || !ObjectId.TryParse(userIdClaim, out var userId))
                 return Results.BadRequest("UserId is missing or invalid.");
 
-            var collection = db.GetCollection<EntityModels.Book>("Books");
+            var collection = db.GetCollection<EntityModels.Book>(EntityModels.Book.CollectionName);
 
             var filter = Builders<EntityModels.Book>.Filter.Where(x => x.Id == objectId && x.UserId == userId);
             var update = Builders<EntityModels.Book>.Update

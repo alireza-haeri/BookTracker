@@ -7,7 +7,7 @@ namespace BookTracker.EntityModels;
 
 public class Book
 {
-    [NotMapped] [BsonIgnore] public const string CollectionName = "Book";
+    [NotMapped] [BsonIgnore] public const string CollectionName = "Books";
 
     public ObjectId Id { get; set; }
     public ObjectId UserId { get; set; }

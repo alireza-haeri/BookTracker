@@ -28,7 +28,7 @@ public class AddBookEndpoint : ICarterModule
 
             var book = request.ToEntity(userId);
 
-            var collection = db.GetCollection<EntityModels.Book>("Books");
+            var collection = db.GetCollection<EntityModels.Book>(EntityModels.Book.CollectionName);
             await collection.InsertOneAsync(book);
 
             return Results.Created($"/book/{book.Id}", book);
